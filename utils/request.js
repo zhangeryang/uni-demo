@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.31.20:3000';
+const BASE_URL = 'http://localhost:3000';
 
 //封装接口请求
 export default (url, data = {}, method = 'GET') => {

@@ -10,23 +10,21 @@
 					<input  
 						type="text" 
 						placeholder="请输入手机号码" 
-						id="phone"
 						:value="phone"
-						@blur="handleInputBlur"/>
+						@blur="handleInputBlur('phone', $event)"/>
 				</view>
 				<view class="input-item">
 					<text class="tit">密码</text>
 					<input 
 						type="password"  
 						placeholder="请输入密码"
-						id="password"
 						:value="password"
-						@blur="handleInputBlur"/>
+						@blur="handleInputBlur('password', $event)"/>
 				</view>
 			</view>
 			<button class="btn confirm-btn" @click="handleLogin">登录</button>
 			<!-- #ifdef MP-WEIXIN -->
-			<button class="btn weixin-btn" bindtap="handleWeixinLogin">微信快捷登录</button>
+			<button class="btn weixin-btn" @click="handleWeixinLogin">微信快捷登录</button>
 			<!-- #endif -->
 			<view class="forget-section">忘记密码?</view>
 		</view>
@@ -35,6 +33,7 @@
 
 <script>
 	import request from "../../utils/request.js";
+	import app from "../../App.vue";
 	export default {
 		data() {
 			return {
@@ -46,8 +45,8 @@
 			
 		},
 		methods: {
-			handleInputBlur(event) {
-				console.log(event, "inputBlur-blur")
+			handleInputBlur(type, event) {
+				this[type] = event.detail.value;
 			},
 			
 			// 登录
@@ -112,6 +111,34 @@
 					})
 				}
 			},
+			
+			async handleWeixinLogin() {
+				uni.getSetting({
+					success(res) {
+						if (res.authSetting['scope.userInfo']) {
+							// 用户信息已授权，获取用户信息
+							uni.getUserInfo({
+								success(res) {
+									// this.phone = "17629109563";
+									// this.password = "wyy123456";
+									// this.handleLogin();
+									uni.reLaunch({
+										url: '/pages/personal/personal'
+									})
+								},
+								fail() {
+									console.log("获取用户信息失败")
+								}
+							})
+						} else if (!res.authSetting['scope.userInfo']) {
+							console.log("需要点击按钮手动授权")
+						}
+					},
+					fail() {
+						console.log("获取已授权选项失败")
+					}
+				})
+			}
 		}
 	}
 </script>

@@ -1,13 +1,24 @@
 <script>
+	import request from "./utils/request.js";
 	export default {
+		globalData:{
+			userInfo: {}
+		},
 		onLaunch: function() {
-			console.log('App Launch')
+			
 		},
 		onShow: function() {
-			console.log('App Show')
+			this.login();
 		},
 		onHide: function() {
-			console.log('App Hide')
+			
+		},
+		methods: {
+			async login() {
+				let result = await request('/getOpenId');
+				console.log(result, "========");
+				uni.setStorageSync('user_token', result);
+			}
 		}
 	}
 </script>

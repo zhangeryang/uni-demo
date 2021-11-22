@@ -23,6 +23,12 @@
 			"style": {
 				"navigationBarTitleText": "登录"
 			}
+		},
+		{
+			"path": "pages/songDetail/songDetail",
+			"style": {
+				"navigationBarTitleText": "have fun"
+			}
 		}
 		
 	],

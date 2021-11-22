@@ -1,12 +1,12 @@
 <template>
 	<view class="personal-container">
 		<view class="user-section">
-			<image class="bg" src="/static/img/personal/bgImg2.jpg"></image>
+			<image class="bg" src="../../static/img/personal/bgImg2.jpg"></image>
 			<view class="user-info-box" @click="toLogin">
 				<view class="portrait-box">
 					<image 
 						class="portrait" 
-						:src="userInfo.avatarUrl ? userInfo.avatarUrl : '/static/img/personal/missing-face.png'"></image>
+						:src="userInfo.avatarUrl ? userInfo.avatarUrl : '../../static/img/personal/missing-face.png'"></image>
 				</view>
 				<view class="info-box">
 					<text class="username">{{ userInfo.nickname ? userInfo.nickname : '游客' }}</text>
@@ -16,7 +16,7 @@
 		
 		<view class="cover-container">
 	
-			<image class="arc" src="/static/img/personal/arc.png"></image>
+			<image class="arc" src="../../static/img/personal/arc.png"></image>
 			<!-- 个人中心导航 -->
 			<view class="nav-section">
 				<view class="nav-item"  hover-class="common-hover"  hover-stay-time="50">
@@ -72,6 +72,7 @@
 
 <script>
 	import request from "../../utils/request.js";
+	import app from "../../App.vue";
 	export default {
 		data() {
 			return {
@@ -79,13 +80,13 @@
 				recentPlayList: [], // 用户播放记录
 			}
 		},
-		async onLoad() {
+		onLoad() {
 			this.getUserInfo();
 		},
 		methods: {
 			// 读取用户的基本信息
 			getUserInfo() {
-				let userInfo = wx.getStorageSync('userInfo');
+				let userInfo = uni.getStorageSync('userInfo');
 				if(userInfo) { // 用户登录
 					// 更新userInfo的状态
 					this.userInfo = JSON.parse(userInfo);

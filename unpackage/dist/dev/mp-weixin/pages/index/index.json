@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "YY音乐",
-  "usingComponents": {
-    "nav-header": "/components/NavHeader/NavHeader"
-  }
-}

@@ -1,1 +1,0 @@
-<view class="header data-v-c0c2efb4"><text class="title data-v-c0c2efb4">{{title}}</text><view class="data-v-c0c2efb4"><text class="description data-v-c0c2efb4">{{content}}</text><text class="getmore data-v-c0c2efb4">查看更多</text></view></view>

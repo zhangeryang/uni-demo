@@ -20,7 +20,7 @@
 	                :key="item.id"
 					:song="item"
 					:index="index"
-	                @click="toSongDetail">
+	                @click="toSongDetail(item, index)">
 	                <image :src="item.album.picUrl"></image>
 	                <view class="music-info">
 	                    <text class="music-name">{{ item.name }}</text>
@@ -45,18 +45,18 @@
 		async onLoad() {
 			// 判断用户是否登录
 			let userInfo = uni.getStorageSync('userInfo');
-			// if(!userInfo) {
-			// 	uni.showToast({
-			// 		title: '请先登录',
-			// 		icon: 'none',
-			// 		success: () => {
-			// 			// 跳转至登录界面
-			// 			uni.reLaunch({
-			// 				url: '/pages/login/login'
-			// 			})
-			// 		}
-			// 	})
-			// }
+			if(!userInfo) {
+				uni.showToast({
+					title: '请先登录',
+					icon: 'none',
+					success: () => {
+						// 跳转至登录界面
+						uni.reLaunch({
+							url: '/pages/login/login'
+						})
+					}
+				})
+			}
 			this.getRecommendList();
 		},
 		methods: {
@@ -67,14 +67,12 @@
 			},
 			
 			// 跳转至songDetail页面
-			toSongDetail(event) {
-				consoel.log(event, "===========")
-				// let { song, index } = event.currentTarget.dataset;
-				// this.index = index;
-				// // 路由跳转传参： query参数
-				// uni.navigateTo({
-				// 	url: '/pages/songDetail/songDetail?musicId=' + song.id
-				// })
+			toSongDetail(item, index) {
+				this.index = index;
+				// 路由跳转传参： query参数
+				uni.navigateTo({
+					url: '/pages/songDetail/songDetail?musicId=' + item.id
+				})
 			},
 		}
 	}

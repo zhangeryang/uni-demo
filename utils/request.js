@@ -8,15 +8,15 @@ export default (url, data = {}, method = 'GET') => {
             data,
             method,
             header: {
-                // cookie: uni.getStorageSync('cookies')
-                // ? uni.getStorageSync('cookies').find(item => item.indexOf('MUSIC_U') !== -1)
-                // : ''
+                cookie: uni.getStorageSync('cookies')
+                ? uni.getStorageSync('cookies').find(item => item.indexOf('MUSIC_U') !== -1)
+                : ''
             },
             success: (res) => {
                 // console.log('请求成功: ', res);
                 if(data.isLogin){// 登录请求
                     // 将用户的cookie存入至本地
-                    uni.setStorage({
+                    uni.setStorageSync({
 						key: 'cookies',
 						data: res.cookies
                     })
